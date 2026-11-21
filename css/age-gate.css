@@ -1,0 +1,59 @@
+html.age-gate-lock {
+	overflow: hidden;
+}
+/* Чёрная заливка сразу, чтобы сайт не мелькал до появления окна */
+html.age-gate-lock::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: #000;
+	z-index: 9998;
+}
+.age-gate {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background: rgba(0, 0, 0, 0.96);
+}
+.age-gate__box {
+	max-width: 460px;
+	width: 100%;
+	padding: 32px 24px;
+	text-align: center;
+	color: #fff;
+	background: #1a1a1a;
+	border: 1px solid #444;
+	border-radius: 12px;
+}
+.age-gate__title {
+	margin: 0 0 12px;
+	font-size: 28px;
+}
+.age-gate__text {
+	margin: 0 0 24px;
+	font-size: 16px;
+	line-height: 1.5;
+}
+.age-gate__buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: center;
+}
+.age-gate__btn {
+	padding: 12px 24px;
+	font-size: 16px;
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid #fff;
+	border-radius: 8px;
+	background: transparent;
+}
+.age-gate__btn--enter {
+	background: #c2185b;
+	border-color: #c2185b;
+}
