@@ -144,3 +144,33 @@
 		font-size: 11px;
 	}
 }
+
+/* Список туров под календарём: только на телефоне */
+.tours-calendar__legend {
+	display: none;
+}
+@media (max-width: 600px) {
+	.tours-calendar__legend {
+		display: grid;
+		gap: 8px;
+		margin-top: 16px;
+	}
+	.tours-calendar__legend-item {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 4px 12px;
+		padding: 12px 14px;
+		background: #fff;
+		border-left: 3px solid var(--tc-gold);
+	}
+	.tours-calendar__legend-city {
+		font-size: 17px;
+		font-weight: 500;
+		color: #000;
+	}
+	.tours-calendar__legend-dates {
+		font-size: 14px;
+		color: #555;
+	}
+}
