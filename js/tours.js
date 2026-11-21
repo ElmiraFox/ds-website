@@ -2,8 +2,28 @@
   var root = document.getElementById('tours-calendar');
   if (!root) return;
 
-  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var LANG = (document.documentElement.lang || 'en').slice(0, 2);
+  var TEXT = {
+    en: {
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      prev: 'Previous month',
+      next: 'Next month',
+      empty: 'No upcoming tours at the moment. Check back soon or contact me.',
+      error: 'Tours cannot be loaded right now. Please try again later.'
+    },
+    pl: {
+      months: ['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień'],
+      days: ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'],
+      prev: 'Poprzedni miesiąc',
+      next: 'Następny miesiąc',
+      empty: 'Obecnie brak zaplanowanych wizyt. Zajrzyj później lub skontaktuj się ze mną.',
+      error: 'Nie można teraz załadować terminów. Spróbuj ponownie później.'
+    }
+  };
+  var T = TEXT[LANG] || TEXT.en;
+  var MONTHS = T.months;
+  var DAYS = T.days;
   var MAX_MONTHS_AHEAD = 11; // на сколько месяцев вперёд можно листать
 
   // Сегодняшний день без времени
@@ -51,7 +71,7 @@
 
     // Если туров нет, пишем об этом над календарём
     if (!tours.length) {
-      root.appendChild(el('p', 'tours-calendar__empty', 'No upcoming tours at the moment. Check back soon or contact me.'));
+      root.appendChild(el('p', 'tours-calendar__empty', T.empty));
     }
 
     // Календарь
@@ -60,7 +80,7 @@
 
     var prev = el('button', 'tours-calendar__nav', '‹');
     prev.type = 'button';
-    prev.setAttribute('aria-label', 'Previous month');
+    prev.setAttribute('aria-label', T.prev);
     prev.disabled = monthsFromToday() <= 0;
     prev.addEventListener('click', function () {
       viewMonth--;
@@ -70,7 +90,7 @@
 
     var next = el('button', 'tours-calendar__nav', '›');
     next.type = 'button';
-    next.setAttribute('aria-label', 'Next month');
+    next.setAttribute('aria-label', T.next);
     next.disabled = monthsFromToday() >= MAX_MONTHS_AHEAD;
     next.addEventListener('click', function () {
       viewMonth++;
@@ -112,19 +132,19 @@
     cal.appendChild(grid);
     root.appendChild(cal);
 
-		// Список туров выбранного месяца (виден только на телефоне)
-		var monthStart = new Date(viewYear, viewMonth, 1);
-		var monthEnd = new Date(viewYear, viewMonth + 1, 0);
-		var legend = el('div', 'tours-calendar__legend');
-		tours.forEach(function (t) {
-			if (t.to >= monthStart && t.from <= monthEnd) {
-				var row = el('div', 'tours-calendar__legend-item');
-				row.appendChild(el('span', 'tours-calendar__legend-city', t.city));
-				row.appendChild(el('span', 'tours-calendar__legend-dates', fmtRange(t)));
-				legend.appendChild(row);
-			}
-		});
-		if (legend.children.length) root.appendChild(legend);
+    // Список туров выбранного месяца (виден только на телефоне)
+    var monthStart = new Date(viewYear, viewMonth, 1);
+    var monthEnd = new Date(viewYear, viewMonth + 1, 0);
+    var legend = el('div', 'tours-calendar__legend');
+    tours.forEach(function (t) {
+      if (t.to >= monthStart && t.from <= monthEnd) {
+        var row = el('div', 'tours-calendar__legend-item');
+        row.appendChild(el('span', 'tours-calendar__legend-city', t.city));
+        row.appendChild(el('span', 'tours-calendar__legend-dates', fmtRange(t)));
+        legend.appendChild(row);
+      }
+    });
+    if (legend.children.length) root.appendChild(legend);
   }
 
   fetch((root.getAttribute('data-json') || './tours.json') + '?v=' + Date.now())
@@ -145,6 +165,6 @@
     })
     .catch(function () {
       root.innerHTML = '';
-      root.appendChild(el('p', 'tours-calendar__empty', 'Tours cannot be loaded right now. Please try again later.'));
+      root.appendChild(el('p', 'tours-calendar__empty', T.error));
     });
 })();
