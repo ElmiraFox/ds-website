@@ -92,7 +92,7 @@ html.age-gate-lock::before {
 	border-color: #e0c067;
 }
 .age-gate__btn:focus-visible {
-	outline: 2px solid var(--age-gold);
+	outline: 1px solid var(--age-gold);
 	outline-offset: 3px;
 }
 @media (max-width: 480px) {
