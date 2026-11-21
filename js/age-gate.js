@@ -10,6 +10,21 @@
 
 	document.documentElement.classList.add('age-gate-lock');
 
+	var pl = (document.documentElement.lang || '').slice(0, 2) === 'pl';
+	var L = pl
+		? {
+			title: 'Tylko dla dorosłych (18+)',
+			text: 'Ta strona zawiera treści dla dorosłych. Musisz mieć ukończone 18 lat, aby wejść.',
+			enter: 'Mam 18 lat lub więcej - Wchodzę',
+			exit: 'Wyjdź'
+		}
+		: {
+			title: 'Adults only (18+)',
+			text: 'This website contains adult content. You must be at least 18 years old to enter.',
+			enter: 'I am 18 or older - Enter',
+			exit: 'Exit'
+		};
+
 	function show() {
 		var gate = document.createElement('div');
 		gate.className = 'age-gate';
@@ -17,12 +32,11 @@
 		gate.setAttribute('aria-modal', 'true');
 		gate.innerHTML =
 			'<div class="age-gate__box">' +
-			'<h2 class="age-gate__title">Adults only (18+)</h2>' +
-			'<p class="age-gate__text">This website contains adult content. ' +
-			'You must be at least 18 years old to enter.</p>' +
+			'<h2 class="age-gate__title">' + L.title + '</h2>' +
+			'<p class="age-gate__text">' + L.text + '</p>' +
 			'<div class="age-gate__buttons">' +
-			'<button type="button" class="age-gate__btn age-gate__btn--enter">I am 18 or older - Enter</button>' +
-			'<button type="button" class="age-gate__btn age-gate__btn--exit">Exit</button>' +
+			'<button type="button" class="age-gate__btn age-gate__btn--enter">' + L.enter + '</button>' +
+			'<button type="button" class="age-gate__btn age-gate__btn--exit">' + L.exit + '</button>' +
 			'</div></div>';
 		document.body.appendChild(gate);
 
