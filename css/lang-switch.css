@@ -64,3 +64,10 @@
 	color: #c9a646;
 	background: #1a1a1a;
 }
+
+.lang-switch__link img {
+	display: block;
+	width: 28px;
+	height: 18px;
+	object-fit: cover;
+}
