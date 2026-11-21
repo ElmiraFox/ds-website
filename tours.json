@@ -1,0 +1,8 @@
+{
+	"tours": [
+		{ "city": "Berlin", "from": "2026-11-10", "to": "2026-11-12", "note": "test, already past" },
+		{ "city": "Krakow", "from": "2026-12-05", "to": "2026-12-08", "note": "" },
+		{ "city": "Gdansk", "from": "2026-12-12", "to": "2026-12-14", "note": "" },
+		{ "city": "Paris", "from": "2026-12-20", "to": "2026-12-23", "note": "" }
+	]
+}

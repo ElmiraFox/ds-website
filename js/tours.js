@@ -19,15 +19,6 @@
 		return new Date(+p[0], +p[1] - 1, +p[2]);
 	}
 
-	function fmt(d) {
-		return d.getDate() + ' ' + MONTHS[d.getMonth()];
-	}
-
-	function fmtRange(t) {
-		var text = t.from.getTime() === t.to.getTime() ? fmt(t.from) : fmt(t.from) + ' – ' + fmt(t.to);
-		return text + ' ' + t.to.getFullYear();
-	}
-
 	function tourForDay(d) {
 		for (var i = 0; i < tours.length; i++) {
 			if (d >= tours[i].from && d <= tours[i].to) return tours[i];
@@ -49,20 +40,10 @@
 	function render() {
 		root.innerHTML = '';
 
-		// Список ближайших туров
-		var list = el('div', 'tours-calendar__list');
+		// Если туров нет, пишем об этом над календарём
 		if (!tours.length) {
-			list.appendChild(el('p', 'tours-calendar__empty', 'No upcoming tours at the moment. Check back soon or contact me.'));
-		} else {
-			tours.forEach(function (t) {
-				var item = el('div', 'tours-calendar__item');
-				item.appendChild(el('span', 'tours-calendar__city', t.city));
-				item.appendChild(el('span', 'tours-calendar__dates', fmtRange(t)));
-				if (t.note) item.appendChild(el('span', 'tours-calendar__note', t.note));
-				list.appendChild(item);
-			});
+			root.appendChild(el('p', 'tours-calendar__empty', 'No upcoming tours at the moment. Check back soon or contact me.'));
 		}
-		root.appendChild(list);
 
 		// Календарь
 		var cal = el('div', 'tours-calendar__cal');

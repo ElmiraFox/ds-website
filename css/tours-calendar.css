@@ -117,11 +117,13 @@
 }
 .tours-calendar__num {
 	font-size: 14px;
+	color: inherit;
 }
 .tours-calendar__label {
 	font-size: 12px;
 	line-height: 1.2;
 	word-break: break-word;
+	color: #000;
 }
 
 @media (max-width: 600px) {
