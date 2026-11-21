@@ -127,7 +127,7 @@
 		if (legend.children.length) root.appendChild(legend);
   }
 
-  fetch('./tours.json?v=' + Date.now())
+  fetch((root.getAttribute('data-json') || './tours.json') + '?v=' + Date.now())
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
