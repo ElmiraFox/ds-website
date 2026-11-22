@@ -2,7 +2,7 @@
 	--tc-gold: #c9a646;
 	max-width: 900px;
 	margin: 0 auto;
-	padding: 40px 20px 70px;
+	padding: 0 20px 70px;
 	font-family: inherit;
 	color: #111;
 }
@@ -128,7 +128,7 @@
 
 @media (max-width: 600px) {
 	.tours-calendar {
-		padding: 24px 12px 50px;
+		padding: 0 12px 50px;
 	}
 	.tours-calendar__cal {
 		padding: 12px;
